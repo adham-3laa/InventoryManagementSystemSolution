@@ -9,4 +9,11 @@
     <ProjectReference Include="..\InventoryManagementSystem.Domain\InventoryManagementSystem.Domain.csproj" />
     <ProjectReference Include="..\InventoryManagementSystem.Abstruction\InventoryManagementSystem.Abstruction.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MappingProfiles\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
+  </ItemGroup>
 </Project>
