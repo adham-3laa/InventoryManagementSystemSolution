@@ -7,7 +7,7 @@ using System.Text;
 
 namespace InventoryManagementSystem.Service.Services
 {
-    internal class ServicesManager(IMapper mapper,IUnitOfWork unitOfWork) : IServicesManager
+    public class ServicesManager(IMapper mapper,IUnitOfWork unitOfWork) : IServicesManager
     {
         // Constructor to initialize the lazy services
         // The services will be initialized when they are accessed for the first time, ensuring that we only create instances of the services when they are actually needed.

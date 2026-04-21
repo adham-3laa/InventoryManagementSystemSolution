@@ -10,4 +10,12 @@
     <ProjectReference Include="..\..\Core\InventoryManagementSystem.Abstruction\InventoryManagementSystem.Abstruction.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<FarmworjReferene Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

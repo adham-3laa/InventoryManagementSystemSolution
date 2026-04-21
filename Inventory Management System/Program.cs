@@ -1,6 +1,8 @@
+using InventoryManagementSystem.Abstruction.IServices;
 using InventoryManagementSystem.Domain.Contracts.UOW;
 using InventoryManagementSystem.Persistence.Context;
 using InventoryManagementSystem.Persistence.UOW;
+using InventoryManagementSystem.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<InventoryDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IServicesManager, ServicesManager>();
 builder.Services.AddAutoMapper(m => m.AddMaps(typeof(Program).Assembly));
 
 var app = builder.Build();
