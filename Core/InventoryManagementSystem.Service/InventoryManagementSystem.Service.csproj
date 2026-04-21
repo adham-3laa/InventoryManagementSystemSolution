@@ -11,7 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MappingProfiles\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="16.1.1" />

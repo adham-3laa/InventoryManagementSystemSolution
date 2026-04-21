@@ -8,7 +8,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\InventoryManagementSystem.Shared\InventoryManagementSystem.Shared.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IServices\" />
-  </ItemGroup>
 </Project>
