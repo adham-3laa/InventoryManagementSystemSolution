@@ -1,3 +1,4 @@
+using Inventory_Management_System.CustomMiddlewares;
 using InventoryManagementSystem.Abstruction.IServices;
 using InventoryManagementSystem.Domain.Contracts.UOW;
 using InventoryManagementSystem.Persistence.Context;
@@ -19,6 +20,8 @@ builder.Services.AddScoped<IServicesManager, ServicesManager>();
 builder.Services.AddAutoMapper(m => m.AddMaps(typeof(Program).Assembly));
 
 var app = builder.Build();
+
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
