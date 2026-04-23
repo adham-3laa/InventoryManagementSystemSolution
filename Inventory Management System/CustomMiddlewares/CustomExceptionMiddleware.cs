@@ -25,7 +25,11 @@ namespace Inventory_Management_System.CustomMiddlewares
                 #region Response Header
 
                 //set the response status code and content type (response headers)
-                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                context.Response.StatusCode = ex switch
+                {
+                    KeyNotFoundException => StatusCodes.Status404NotFound,
+                    _ => StatusCodes.Status500InternalServerError
+                };
                 context.Response.ContentType = "application/json";
                 #endregion
                 #region Response Body
