@@ -1,3 +1,4 @@
+using InventoryManagementSystem.Domain.Contracts.Specifications;
 using InventoryManagementSystem.Domain.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,11 @@ namespace InventoryManagementSystem.Domain.Contracts.Repos
         Task AddAsync(TEntity entity);
         void Delete(TEntity entity);
         void Update(TEntity entity);
+
+        Task<IEnumerable<TEntity>> GetAllWithSpecificationsAsync(ISpecifications<TEntity, TKey> specifications);
+
+        Task<TEntity?> GetByIdWithSpecificationsAsync(TKey id, ISpecifications<TEntity, TKey> specifications);
+
+
     }
 }

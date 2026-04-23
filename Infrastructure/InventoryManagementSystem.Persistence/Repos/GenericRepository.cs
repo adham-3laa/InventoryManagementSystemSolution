@@ -1,4 +1,5 @@
 using InventoryManagementSystem.Domain.Contracts.Repos;
+using InventoryManagementSystem.Domain.Contracts.Specifications;
 using InventoryManagementSystem.Domain.Entities.Base;
 using InventoryManagementSystem.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -21,13 +22,15 @@ namespace InventoryManagementSystem.Persistence.Repos
 
         public void Delete(TEntity entity) => context.Set<TEntity>().Remove(entity);
 
+        public async Task<IEnumerable<TEntity>> GetAllWithSpecificationsAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            return await SpecificationEvaluator.CreateQuary(context.Set<TEntity>().AsQueryable(), specifications).ToListAsync();
+        }
 
-
-
-
-
-
-
-
+        public async Task<TEntity?> GetByIdWithSpecificationsAsync(TKey id, ISpecifications<TEntity, TKey> specifications)
+        {
+            return await SpecificationEvaluator.CreateQuary(context.Set<TEntity>().AsQueryable(), specifications).FirstOrDefaultAsync();
+            
+        }
     }
 }
