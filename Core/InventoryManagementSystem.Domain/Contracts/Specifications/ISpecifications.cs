@@ -15,6 +15,10 @@ namespace InventoryManagementSystem.Domain.Contracts.Specifications
         //Includes is used to specify the related entities that should be included in the query results. It is a list of lambda expressions that take an entity of type TEntity and return an object representing the related entity to be included. This allows for eager loading of related data, which can improve performance by reducing the number of database queries needed to retrieve the related data.
         List<Expression<Func<TEntity, object>>> Includes { get; }
 
+        Expression<Func<TEntity, object>>? OrderBy { get; }
+
+        Expression<Func<TEntity, object>>? OrderByDesc { get; }
+
 
     }
 }

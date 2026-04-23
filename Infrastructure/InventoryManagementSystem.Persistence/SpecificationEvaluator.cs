@@ -17,6 +17,16 @@ namespace InventoryManagementSystem.Persistence
             {
                 query = query.Where(specifications.Criteria);
             }
+
+            if(specifications.OrderBy != null)
+            {
+                query = query.OrderBy(specifications.OrderBy);
+            }
+            else if (specifications.OrderByDesc != null)
+            {
+                query = query.OrderByDescending(specifications.OrderByDesc);
+            }
+
             if (specifications.Includes != null && specifications.Includes.Any())
             {
                 query = specifications.Includes.Aggregate(query, (currentQuery, Expression) => currentQuery.Include(Expression));
