@@ -1,10 +1,10 @@
 public class pruductSpecification : BaseSpecification<Product, int>
 {
-	public pruductSpecification(int? CategoryId, ProductSortingOptions? SortingOption)
-		: base(CategoryId)
+	public pruductSpecification(ProductQueryParams queryParams)
+		: base(queryParams.CategoryId.HasValue ? p => p.CategoryId == queryParams.CategoryId : null && queryParams.SearchValue != null ? p => p.Name.Contains(queryParams.SearchValue.ToLower()) : null)
 	{
 		AddInclude(p=> p.Category);
-		switch (SortingOption)
+		switch (queryParams.SortingOption)
 		{
 			case ProductSortingOptions.NameAsc:
 				AddOrderBy(p => p.Name);
@@ -20,8 +20,8 @@ public class pruductSpecification : BaseSpecification<Product, int>
 				break;
 		}
 	}
-	public pruductSpecification(int id)
-		: base(p => p.Id == id)
+	public pruductSpecification(ProductQueryParams queryParams)
+		: base(queryParams.CategoryId.HasValue ? p => p.CategoryId == queryParams.CategoryId : null)
 	{
 		AddInclude(p => p.Category);
 	}

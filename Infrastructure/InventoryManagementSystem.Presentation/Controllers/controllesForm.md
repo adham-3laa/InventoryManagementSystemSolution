@@ -3,9 +3,9 @@
 public class ProductsController(IServicesManager servicesManager) : ControllerBase
 {
 	[HttpGet]
-	public async task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts(int? CategoryId, ProductSortingOptions? SortingOption)
+	public async task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts([FromQuery]	ProductQueryParams queryParams)
 	{
-		var products = await servicesManager.ProductService.GetAllProductsAsync(CategoryId, SortingOption);
+		var products = await servicesManager.ProductService.GetAllProductsAsync(queryParams.CategoryId, queryParams.SortingOption);
 		return Ok(products);
 	}
 	[HttpGet("{id}")]
