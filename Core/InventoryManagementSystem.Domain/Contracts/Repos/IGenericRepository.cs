@@ -18,6 +18,7 @@ namespace InventoryManagementSystem.Domain.Contracts.Repos
 
         Task<TEntity?> GetByIdWithSpecificationsAsync(TKey id, ISpecifications<TEntity, TKey> specifications);
 
+        Task<int> GetCountWithSpecificationsAsync(ISpecifications<TEntity, TKey> specifications);
 
     }
 }

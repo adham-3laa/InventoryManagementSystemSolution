@@ -19,6 +19,11 @@ namespace InventoryManagementSystem.Domain.Contracts.Specifications
 
         Expression<Func<TEntity, object>>? OrderByDesc { get; }
 
+        // take and skip for paginaion 
+        int Take {  get; }
+        int Skip { get; }
+
+        bool IsPaginated { get; set; }
 
     }
 }

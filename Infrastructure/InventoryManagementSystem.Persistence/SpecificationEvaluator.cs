@@ -27,6 +27,12 @@ namespace InventoryManagementSystem.Persistence
                 query = query.OrderByDescending(specifications.OrderByDesc);
             }
 
+            //if we have pagination enabled, we will apply skip and take
+            if (specifications.IsPaginated)
+            {
+                query = query.Skip(specifications.Skip).Take(specifications.Take);
+            }
+
             if (specifications.Includes != null && specifications.Includes.Any())
             {
                 query = specifications.Includes.Aggregate(query, (currentQuery, Expression) => currentQuery.Include(Expression));

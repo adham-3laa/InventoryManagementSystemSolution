@@ -32,5 +32,10 @@ namespace InventoryManagementSystem.Persistence.Repos
             return await SpecificationEvaluator.CreateQuary(context.Set<TEntity>().AsQueryable(), specifications).FirstOrDefaultAsync();
             
         }
+
+        public async Task<int> GetCountWithSpecificationsAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            return await SpecificationEvaluator.CreateQuary(context.Set<TEntity>().AsQueryable(), specifications).CountAsync();
+        }
     }
 }

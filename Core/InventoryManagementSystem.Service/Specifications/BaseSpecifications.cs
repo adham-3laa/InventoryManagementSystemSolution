@@ -44,6 +44,20 @@ namespace InventoryManagementSystem.Service.Specifications
             Includes.Add(includeExpression);
         }
         #endregion
+        #region Pagination
+        public int Take { get; private set; }
+
+        public int Skip { get; private set; }
+
+        public bool IsPaginated { get; set; }
+
+        public void ApplyPagination(int  pageIndex, int pageSize) 
+        {
+            IsPaginated = true;
+            Take = pageSize;
+            Skip = (pageIndex - 1) * pageSize;
+        }
+        #endregion
 
     }
 }
