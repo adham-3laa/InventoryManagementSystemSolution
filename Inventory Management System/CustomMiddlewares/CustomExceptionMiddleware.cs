@@ -18,6 +18,16 @@ namespace Inventory_Management_System.CustomMiddlewares
             try
             {
                 await _next.Invoke(context);
+
+                if(context.Response.StatusCode == StatusCodes.Status404NotFound)
+                {
+                    var response = new ErrorToReturn()
+                    {
+                        StatusCode = context.Response.StatusCode,
+                        Message = $"The Endpoint {context.Request.Path} you are looking for was not found."
+                    };
+                    await context.Response.WriteAsJsonAsync(response);
+                }
             }
             catch (Exception ex)
             {
