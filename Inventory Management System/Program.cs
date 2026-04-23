@@ -4,6 +4,8 @@ using InventoryManagementSystem.Domain.Contracts.UOW;
 using InventoryManagementSystem.Persistence.Context;
 using InventoryManagementSystem.Persistence.UOW;
 using InventoryManagementSystem.Service.Services;
+using InventoryManagementSystem.Shared.ErrorModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,25 @@ builder.Services.AddDbContext<InventoryDbContext>(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IServicesManager, ServicesManager>();
 builder.Services.AddAutoMapper(m => m.AddMaps(typeof(Program).Assembly));
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState.Where(m => m.Value.Errors.Any())
+            .Select(M=>new ValidationError()
+            {
+                Field = M.Key,
+                Errors = M.Value.Errors.Select(e => e.ErrorMessage)
+            });
+        var response = new ValidationErrorToReturn()
+        {
+            StatusCode = (int)System.Net.HttpStatusCode.BadRequest,
+            Errors = errors
+        };
+        return new BadRequestObjectResult(response);
+    };
+});
 
 var app = builder.Build();
 
